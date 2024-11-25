@@ -2,8 +2,17 @@
     <section>
         <header><h1>My friends</h1></header>
         <ul>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
+            <friend-contact
+                v-for="friend in friends"
+                :key="friend.id"
+                :id="friend.id"
+                :name="friend.name" 
+                :phone-number="friend.phone" 
+                :email-address="friend.email"
+                :is-favorite="friend.favorite"
+                @toggle-favorite="toggleFavoriteStatus"
+            ></friend-contact>
+            <!-- using v-bind to pass javascript value likes boolean to props -->
         </ul>
     </section>
 </template>
@@ -18,14 +27,25 @@ export default {
                 id: 'manuel',
                 name: 'Manuel Lorenz',
                 phone: '0123 456 90',
-                email: 'manuel@mail.com'
+                email: 'manuel@mail.com',
+                favorite: true
             }, {
                 id: 'julie',
                 name: 'Julie Jones',
                 phone: '0831 8948 89',
-                email: 'julie@mail.com'
+                email: 'julie@mail.com',
+                favorite: false
             }]
         };
+    },
+    methods: {
+      toggleFavoriteStatus(friendID) {
+        const currentFriend = this.friends.find(
+          (friend) => friend.id === friendID
+        );
+
+        currentFriend.favorite = !currentFriend.favorite;
+      }
     }
 }
 </script>
