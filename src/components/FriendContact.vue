@@ -7,6 +7,7 @@
             <li><strong>Phone:</strong> {{ phoneNumber }}</li>
             <li><strong>Email:</strong> {{ emailAddress }}</li>
         </ul>
+        <button @click="$emit('delete', id)">Delete</button>
     </li>
 </template>
 
@@ -44,6 +45,8 @@ export default {
             // }
         }
     },
+    //to help developer show list of create emits attribute on methods
+    emits: ['toggle-favorite', 'delete'],
     data() {
         return {
             detailsAreVisible: false,
